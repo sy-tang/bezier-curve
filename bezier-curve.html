@@ -28,7 +28,7 @@
       var ctx2 = document.getElementsByTagName('canvas')[1].getContext('2d')
       var ctx3 = document.getElementsByTagName('canvas')[2].getContext('2d')
 
-      var points = [], colors = [], running = true, num
+      var points = [], colors = [], running = true, steps = 200, interval = 16, num
 
       ctx1.font = '16px consolas'
       ctx1.fillStyle = ctx1.strokeStyle = 'hsl(0, 0%, 50%)'
@@ -51,7 +51,7 @@
         ctx2.strokeStyle = ctx2.fillStyle = colors[color]
 
         node = arr.reduce(function(previous, current, index) {
-          var p = {x: arr[index - 1].x + (arr[index].x - arr[index - 1].x) * per / 100, y: arr[index - 1].y + (arr[index].y - arr[index - 1].y) * per / 100}
+          var p = {x: arr[index - 1].x + (arr[index].x - arr[index - 1].x) * per, y: arr[index - 1].y + (arr[index].y - arr[index - 1].y) * per}
 
           if(index > 1) {
             ctx2.beginPath()
@@ -81,9 +81,9 @@
         toggle()
         ctx3.beginPath()
         ctx3.moveTo(points[0].x, points[0].y)
-        for(var i = 0; i <= 100; i++) {
-          draw(i, points, 0)
-          $await(Wind.Async.sleep(16))
+        for(var i = 0; i <= steps; i++) {
+          draw(i / steps, points, 0)
+          $await(Wind.Async.sleep(interval))
           ctx2.clearRect(0, 0, 800, 600)
         }
         ctx3.closePath()
@@ -126,8 +126,8 @@
       input.addEventListener('change', count, false)
 
       window.addEventListener('load', function() {
-        for(var i = 0; i < (input.max); i++) {
-          colors[i] = 'hsl(' + 60*(i + 1) + ', 100%, 30%)'
+        for(var i = 0; i < parseInt(input.max); i++) {
+          colors[i] = 'hsl(' + 60*(i + 1) + ', 60%, 60%)'
         }
         count()
         toggle()
