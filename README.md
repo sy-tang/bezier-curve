@@ -3,7 +3,7 @@ Bezier Curve
 
 **Read the blog post**
 
-+ Coming soon...
++ http://forcefront.com/2013/bezier-curve-literacy/
 
 
 **Try out the demo**
