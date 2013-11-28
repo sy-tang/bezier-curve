@@ -1,4 +1,4 @@
-Bezier Curve
+Bézier Curve
 ------------
 
 **Read the blog post**
